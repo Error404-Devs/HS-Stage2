@@ -1,6 +1,5 @@
-from flask import Blueprint, jsonify
-
-api_bp = Blueprint("api", __name__)
+from flask import jsonify
+from . import api_bp
 
 
 @api_bp.route("/data")
