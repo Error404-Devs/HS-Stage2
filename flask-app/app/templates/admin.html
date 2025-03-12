@@ -152,66 +152,132 @@
         cursor: pointer;
       }
     </style>
-    <script>
-      const tags = [
-        { tagNumber: "001", tagId: "1044211108658", data: "User" },
-        { tagNumber: "002", tagId: "358152211892", data: "User" },
-        { tagNumber: "003", tagId: "83570004318", data: "Admin" },
-      ];
+<script>
+  let tags = [];
+  let users = []; // Store fetched users
 
-      const transferOptions = ["Department A", "Department B", "Department C"];
+  async function fetchTags() {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/tags");
+      tags = await response.json();
+      await fetchUsers(); // Fetch users before rendering tags
+      showTab("Tags");
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }
+  }
 
-      function showTab(tabName) {
-        const contentDiv = document.getElementById("content");
+  async function fetchUsers() {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/users");
+      users = await response.json();
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }
 
-        if (tabName === "Tags") {
-          let tagCards = tags
-            .map((tag, index) => {
-              return `
-            <div class="card" id="card-${index}">
-                <div class="card-details">
-                    <img src="static/tag.jpg" alt="RFID Tag">
-                    <p class="text-title">Tag ${tag.tagNumber}</p>
-                    <p class="text-body"><strong>ID:</strong> ${tag.tagId}</p>
-                    <p class="text-body"><strong>Data:</strong> ${tag.data}</p>
-                </div>
-                <button class="card-button" onclick="configureTag(${index})">Configure</button>
-                <div id="actions-${index}" class="actions">
-                    <select id="transferSelect-${index}" class="transfer-select">
-                        ${transferOptions.map((option) => `<option value="${option}">${option}</option>`).join("")}
-                    </select>
-                    <button class="action-button transfer-button" onclick="transferUser(${index})">Transfer User</button>
-                    <button class="action-button remove-button" onclick="removeUser(${index})">Remove User</button>
-                </div>
-            </div>
-          `;
-            })
-            .join("");
+  function showTab(tabName) {
+    const contentDiv = document.getElementById("content");
 
-          contentDiv.innerHTML = tagCards;
-        } else {
-          contentDiv.innerHTML =
-            "<h1 style='text-align: center; width: 100%;'>" + tabName + "</h1>";
-        }
+    if (tabName === "Tags") {
+      let tagCards = tags
+        .map((tag, index) => {
+          return `
+          <div class="card" id="card-${index}">
+              <div class="card-details">
+                  <img src="static/tag.jpg" alt="RFID Tag">
+                  <p class="text-title">${tag.name}</p>
+                  <p class="text-body"><strong>ID:</strong> ${tag.id}</p>
+                  <p class="text-body"><strong>Current user:</strong> ${tag.data && tag.data.username ? tag.data.username : "No user"}</p>
+              </div>
+              <button class="card-button" onclick="configureTag(${index})">Configure</button>
+              <div id="actions-${index}" class="actions">
+                  <select id="transferSelect-${index}" class="transfer-select">
+                      ${users.map(user => `<option value="${user.id}">${user.username}</option>`).join("")}
+                  </select>
+                  <button class="action-button transfer-button" onclick="transferUser(${index})">Transfer User</button>
+                  <button class="action-button remove-button" onclick="removeUser(${index})">Remove User</button>
+              </div>
+          </div>
+        `;
+        })
+        .join("");
+
+      contentDiv.innerHTML = tagCards;
+    } else {
+      contentDiv.innerHTML =
+        "<h1 style='text-align: center; width: 100%;'>" + tabName + "</h1>";
+    }
+  }
+
+  function configureTag(index) {
+    let actionDiv = document.getElementById(`actions-${index}`);
+    actionDiv.style.display = actionDiv.style.display === "none" ? "block" : "none";
+  }
+
+  async function transferUser(index) {
+    let selectedUserId = document.getElementById(`transferSelect-${index}`).value;
+    let tagId = tags[index].id;
+
+    let selectedUser = users.find(user => user.id === selectedUserId);
+    const updatedData = { data: {
+        "id": selectedUser.id,
+        "username": selectedUser.username,
+        "password": selectedUser.password,
+        "role": selectedUser.role 
+      }};
+
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/api/tags/${tagId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`Tag ${tagId} successfully transferred to user ${selectedUser.username}`);
+        fetchTags(); // Refresh tag list
+      } else {
+        alert(`Failed to transfer tag: ${result.error}`);
       }
+    } catch (error) {
+      console.error("Error transferring tag:", error);
+      alert("An error occurred while transferring the tag.");
+    }
+  }
 
-      function configureTag(index) {
-        let actionDiv = document.getElementById(`actions-${index}`);
-        actionDiv.style.display =
-          actionDiv.style.display === "none" ? "block" : "none";
-      }
+  async function removeUser(index) {
+    let tagId = tags[index].id;
 
-      function transferUser(index) {
-        let selectedValue = document.getElementById(
-          `transferSelect-${index}`
-        ).value;
-        alert(`Transferring Tag ${tags[index].tagNumber} to ${selectedValue}`);
-      }
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/api/tags/${tagId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: {} }), // Empty data field
+      });
 
-      function removeUser(index) {
-        alert(`Removing User for Tag ${tags[index].tagNumber}`);
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`User removed from tag ${tagId}`);
+        fetchTags(); // Refresh tag list
+      } else {
+        alert(`Failed to remove user: ${result.error}`);
       }
-    </script>
+    } catch (error) {
+      console.error("Error removing user:", error);
+      alert("An error occurred while removing the user.");
+    }
+  }
+
+  window.onload = fetchTags;
+</script>
   </head>
   <body>
     <div class="sidebar">
