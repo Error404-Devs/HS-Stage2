@@ -1,24 +1,41 @@
 import requests
 from flask import render_template
 from . import frontend_bp  # Import the frontend_bp blueprint
+import psutil
+import os
 
+def get_cpu_info():
+    cpu_info = {
+        "architecture": os.uname().machine,
+        "cpu_model": "Broadcom BCM2837" if "arm" in os.uname().machine.lower() else "Unknown",
+        "cpu_frequency": f"{psutil.cpu_freq().current:.2f} MHz",
+        "cpu_cores": psutil.cpu_count(logical=False),
+        "logical_processors": psutil.cpu_count(logical=True),
+        "cpu_usage": f"{psutil.cpu_percent(interval=1)}%",
+        "temperature": f"{get_cpu_temperature()}°C"
+    }
+    return cpu_info
+
+def get_cpu_temperature():
+    try:
+        with open("/sys/class/thermal/thermal_zone0/temp", "r") as file:
+            temp = int(file.read()) / 1000  # Convert to °C
+            return round(temp, 1)
+    except FileNotFoundError:
+        return "N/A"
 
 @frontend_bp.route("/")
-def index():
-    # Make an API call to the API route we created
-    response = requests.get("http://127.0.0.1:5000/api/data")
-    print(response)
+def home():
+    cpu_info = get_cpu_info()
 
-    # Assuming the response is a JSON object, extract the message
-    api_data = (
-        response.json()
-        if response.status_code == 200
-        else {"message": "API call failed"}
-    )
+    # Fetch RFID data from backend
+    try:
+        response = requests.get("http://127.0.0.1:5000/api/rfid/latest")
+        rfid_data = response.json()
+    except:
+        rfid_data = {"id": "N/A", "text": "No data available"}
 
-    # Pass the message to the template
-    return render_template("index.html", message=api_data["message"])
-
+    return render_template("index.html", cpu_info=cpu_info, rfid_data=rfid_data)
 
 @frontend_bp.route("/login", methods=["GET", "POST"])
 def login():
