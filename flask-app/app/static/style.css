@@ -1,18 +1,19 @@
 /* static/style.css */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 #response {
-    margin-top: 20px;
-    font-size: 18px;
-    color: green;
+  margin-top: 20px;
+  font-size: 18px;
+  color: green;
 }
+

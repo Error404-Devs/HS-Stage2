@@ -1,5 +1,9 @@
-
-.venv
-__pycache__
-.env
+# Ignore virtual environment directories
 venv/
+.venv/
+
+# Ignore compiled Python files
+__pycache__/
+
+# Ignore environment variables and sensitive configuration files
+.env
