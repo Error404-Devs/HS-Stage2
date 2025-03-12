@@ -1,16 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full-Stack Flask</title>
-    <link rel="stylesheet" href="../static/style.css" />
+    <title>CPU Info</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1e3a8a;
+        color: #ffffff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #2563eb;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        width: 320px;
+        text-align: left;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #ffffff;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      th {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    </style>
   </head>
   <body>
-    <div id="app">
-      <h1>Welcome to Full-Stack Flask App</h1>
-      <button onclick="">Get Data from Backend</button>
-      <div id="response">{{ message }}</div>
+    <div class="container">
+      <h1>Raspberry Pi CPU Information</h1>
+    </div>
+
+    <div class="card">
+      <table>
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Architecture</td>
+          <td>{{ cpu_info['architecture'] if cpu_info else 'ARMv7' }}</td>
+        </tr>
+        <tr>
+          <td>CPU Model</td>
+          <td>
+            {{ cpu_info['cpu_model'] if cpu_info else 'Broadcom BCM2837' }}
+          </td>
+        </tr>
+        <tr>
+          <td>CPU Frequency</td>
+          <td>{{ cpu_info['cpu_frequency'] if cpu_info else '1.2 GHz' }}</td>
+        </tr>
+        <tr>
+          <td>Physical Cores</td>
+          <td>{{ cpu_info['cpu_cores'] if cpu_info else '4' }}</td>
+        </tr>
+        <tr>
+          <td>Logical Processors</td>
+          <td>{{ cpu_info['logical_processors'] if cpu_info else '4' }}</td>
+        </tr>
+        <tr>
+          <td>CPU Usage</td>
+          <td>{{ cpu_info['cpu_usage'] if cpu_info else '15%' }}</td>
+        </tr>
+        <tr>
+          <td>Temperature</td>
+          <td>{{ cpu_info['temperature'] if cpu_info else '45°C' }}</td>
+        </tr>
+      </table>
     </div>
   </body>
 </html>
