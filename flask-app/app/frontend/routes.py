@@ -31,7 +31,7 @@ def get_cpu_temperature():
 
 @frontend_bp.route("/")
 def home():
-    cpu_info = get_cpu_info()
+    # cpu_info = get_cpu_info()
 
     # Fetch RFID data from backend
     try:
@@ -40,7 +40,7 @@ def home():
     except:
         rfid_data = {"id": "N/A", "text": "No data available"}
 
-    return render_template("index.html", cpu_info=cpu_info, rfid_data=rfid_data)
+    return render_template("index.html", rfid_data=rfid_data)
 
 
 @frontend_bp.route("/login", methods=["GET", "POST"])
