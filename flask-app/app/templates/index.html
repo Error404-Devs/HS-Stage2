@@ -56,12 +56,26 @@
         background-color: rgba(255, 255, 255, 0.1);
       }
     </style>
+     <script>
+        function fetchRFIDData() {
+            fetch('/api/rfid/latest')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('rfid-id').innerText = data.id || "No ID";
+                    document.getElementById('rfid-text').innerText = data.text || "No Data";
+                })
+                .catch(error => console.error("Error fetching RFID data:", error));
+        }
+
+        setInterval(fetchRFIDData, 3000); // Fetch data every 3 seconds
+    </script>
   </head>
   <body>
     <div class="container">
-      <h1>Raspberry Pi CPU Information</h1>
+    <h1>RFID Scanner</h1>
+    <p><strong>RFID ID:</strong> <span id="rfid-id">Waiting...</span></p>
+    <p><strong>RFID Data:</strong> <span id="rfid-text">Waiting...</span></p>
     </div>
-
     <div class="card">
       <table>
         <tr>
