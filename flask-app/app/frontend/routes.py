@@ -48,3 +48,14 @@ def login():
 def signup():
 
     return render_template("signup.html")
+
+@frontend_bp.route("/user", methods=["GET", "POST"])
+def user():
+
+    return render_template("user.html")
+
+@frontend_bp.route("/admin", methods=["GET", "POST"])
+def admin():
+
+    return render_template("admin.html")
+
