@@ -4,17 +4,21 @@ from . import frontend_bp  # Import the frontend_bp blueprint
 import psutil
 import os
 
+
 def get_cpu_info():
     cpu_info = {
         "architecture": os.uname().machine,
-        "cpu_model": "Broadcom BCM2837" if "arm" in os.uname().machine.lower() else "Unknown",
+        "cpu_model": (
+            "Broadcom BCM2837" if "arm" in os.uname().machine.lower() else "Unknown"
+        ),
         "cpu_frequency": f"{psutil.cpu_freq().current:.2f} MHz",
         "cpu_cores": psutil.cpu_count(logical=False),
         "logical_processors": psutil.cpu_count(logical=True),
         "cpu_usage": f"{psutil.cpu_percent(interval=1)}%",
-        "temperature": f"{get_cpu_temperature()}°C"
+        "temperature": f"{get_cpu_temperature()}°C",
     }
     return cpu_info
+
 
 def get_cpu_temperature():
     try:
@@ -23,6 +27,7 @@ def get_cpu_temperature():
             return round(temp, 1)
     except FileNotFoundError:
         return "N/A"
+
 
 @frontend_bp.route("/")
 def home():
@@ -36,6 +41,7 @@ def home():
         rfid_data = {"id": "N/A", "text": "No data available"}
 
     return render_template("index.html", cpu_info=cpu_info, rfid_data=rfid_data)
+
 
 @frontend_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -66,13 +72,14 @@ def signup():
 
     return render_template("signup.html")
 
+
 @frontend_bp.route("/user", methods=["GET", "POST"])
 def user():
 
     return render_template("user.html")
 
+
 @frontend_bp.route("/admin", methods=["GET", "POST"])
 def admin():
 
     return render_template("admin.html")
-
