@@ -3,6 +3,19 @@
         "id": "1044211108658",
         "name": "Tag 001",
         "data": {
+<<<<<<< HEAD
+            "id": "113",
+            "username": "david",
+            "password": "password123",
+            "role": "User"
+        }
+    },
+    {
+        "id": "358152211892",
+        "name": "Tag 002",
+        "data": {
+=======
+>>>>>>> upstream/main
             "id": "111",
             "username": "vladut",
             "password": "password123",
@@ -10,6 +23,15 @@
         }
     },
     {
+<<<<<<< HEAD
+        "id": "83570004318",
+        "name": "Tag 003",
+        "data": {
+            "id": "112",
+            "username": "vlad",
+            "password": "password123",
+            "role": "Admin"
+=======
         "id": "358152211892",
         "name": "Tag 002",
         "data": {}
@@ -22,6 +44,7 @@
             "username": "david",
             "password": "password123",
             "role": "User"
+>>>>>>> upstream/main
         }
     }
 ]

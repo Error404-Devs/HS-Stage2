@@ -1,0 +1,473 @@
+[
+    {
+        "id": "be202715-1e1b-46db-b5dc-3fb988c6f0db",
+        "message": "RFID SCANNED FAILED",
+        "component_data": {
+            "data": {
+                "id": "0",
+                "error": "wrong tag"
+            }
+        },
+        "date_logged": "2025-03-13T14:08:57.884591"
+    },
+    {
+        "id": "9cc1e05a-4389-4dfb-a853-877d0cb75e94",
+        "message": "LED TURNED OFF!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "off"
+            }
+        },
+        "date_logged": "2025-03-13T14:08:57.892000"
+    },
+    {
+        "id": "d4a582e7-2981-45bf-8b6c-9ce6c3c16196",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "358152211892",
+            "name": "Tag 002",
+            "data": {
+                "id": "111",
+                "username": "vladut",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T14:43:25.953081"
+    },
+    {
+        "id": "6abdde45-354a-457b-bf9d-845938418ea5",
+        "message": "LED TWO TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "2"
+            }
+        },
+        "date_logged": "2025-03-13T14:43:25.954881"
+    },
+    {
+        "id": "3fd02eb4-b698-4e90-8c06-37c002728147",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T14:48:37.576168"
+    },
+    {
+        "id": "c220eb67-af43-492a-8851-46d486946527",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T14:48:37.578171"
+    },
+    {
+        "id": "568186ba-ded9-4e9b-9f0d-d7f8f61c6fb2",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T14:50:22.345141"
+    },
+    {
+        "id": "87d6c5bc-d222-4666-9095-6eaa5b7600c2",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T14:50:22.347299"
+    },
+    {
+        "id": "8733d082-0f83-4fd0-ac03-4363b8e3ab40",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T14:57:51.446915"
+    },
+    {
+        "id": "9019b256-91f9-4790-8efe-f5e2795e2d3a",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T14:57:51.449312"
+    },
+    {
+        "id": "84975abc-0d5e-413c-a17b-c4639341fa5e",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T14:58:15.165599"
+    },
+    {
+        "id": "a6e9c06f-069c-4241-9b1f-39feb3ce4201",
+        "message": "RFID SCANNED FAILED",
+        "component_data": {
+            "data": {
+                "id": "0",
+                "error": "Wrong tag"
+            }
+        },
+        "date_logged": "2025-03-13T14:58:15.168606"
+    },
+    {
+        "id": "28fdee64-b986-4797-b16f-ca83cdcab4c7",
+        "message": "LED TURNED OFF!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "off"
+            }
+        },
+        "date_logged": "2025-03-13T14:58:15.175422"
+    },
+    {
+        "id": "e28ba155-d95d-4a3a-9fe8-e0c5a3ae8f17",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T15:41:24.597037"
+    },
+    {
+        "id": "6a05401d-0d4d-47be-94cf-0165b9945943",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T15:41:24.599841"
+    },
+    {
+        "id": "5cda977f-318c-4be2-aab4-e92f2456de10",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T15:44:04.076904"
+    },
+    {
+        "id": "73f37f60-d033-43f3-a858-6e5c1795c816",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T15:44:04.080202"
+    },
+    {
+        "id": "68d2795c-637e-4934-9818-dd36f021dffb",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "358152211892",
+            "name": "Tag 002",
+            "data": {
+                "id": "111",
+                "username": "vladut",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T15:45:51.628933"
+    },
+    {
+        "id": "536f8419-af77-4f8b-baab-13f9b2c679f3",
+        "message": "LED TWO TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "2"
+            }
+        },
+        "date_logged": "2025-03-13T15:45:51.632452"
+    },
+    {
+        "id": "f7855fa4-f948-4b68-99c7-13900dffe1e9",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:07:38.812039"
+    },
+    {
+        "id": "6771e86f-e979-4572-b1ce-1e28842c4970",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T17:07:40.364955"
+    },
+    {
+        "id": "daa995e1-b2e6-4066-b387-59b744d702b3",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "358152211892",
+            "name": "Tag 002",
+            "data": {
+                "id": "111",
+                "username": "vladut",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:08:16.918057"
+    },
+    {
+        "id": "d0005344-4a11-40a7-a105-6822ccbd64b6",
+        "message": "RFID SCANNED FAILED",
+        "component_data": {
+            "data": {
+                "id": "0",
+                "error": "Wrong tag"
+            }
+        },
+        "date_logged": "2025-03-13T17:08:16.921573"
+    },
+    {
+        "id": "9e90aa00-43e8-4cf5-9741-fd5bd33e77fa",
+        "message": "LED TURNED OFF!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "off"
+            }
+        },
+        "date_logged": "2025-03-13T17:08:16.927415"
+    },
+    {
+        "id": "91f3133a-911b-438c-a58e-d103de3ff2cd",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "358152211892",
+            "name": "Tag 002",
+            "data": {
+                "id": "111",
+                "username": "vladut",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:08:35.632065"
+    },
+    {
+        "id": "cd510e72-4ce5-4759-aa79-0e2c059e833d",
+        "message": "LED TWO TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "2"
+            }
+        },
+        "date_logged": "2025-03-13T17:08:35.636013"
+    },
+    {
+        "id": "a81882d7-04bb-40db-b210-afc104543edd",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:18:52.754563"
+    },
+    {
+        "id": "aff8ce1e-26dd-4827-b726-fd5d96c99ab7",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T17:18:52.762479"
+    },
+    {
+        "id": "73215026-402e-4167-8081-e59983aec6f3",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "83570004318",
+            "name": "Tag 003",
+            "data": {
+                "id": "112",
+                "username": "vlad",
+                "password": "password123",
+                "role": "Admin"
+            }
+        },
+        "date_logged": "2025-03-13T17:21:05.980256"
+    },
+    {
+        "id": "bf132574-7b06-4a57-95d7-3b0aab1ce095",
+        "message": "LED TURNED OFF!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "off"
+            }
+        },
+        "date_logged": "2025-03-13T17:21:05.984664"
+    },
+    {
+        "id": "a9b5b95e-cd0b-41cc-9baf-2d1acd7b2ea1",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:32:46.889237"
+    },
+    {
+        "id": "0457f293-9cbe-4199-8113-0e85e23a7b9c",
+        "message": "LED ONE TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "1"
+            }
+        },
+        "date_logged": "2025-03-13T17:32:46.893795"
+    },
+    {
+        "id": "6dafc261-4ee5-44ad-8498-7775431e2088",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "1044211108658",
+            "name": "Tag 001",
+            "data": {
+                "id": "113",
+                "username": "david",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:34:21.145937"
+    },
+    {
+        "id": "77d6764b-d5db-4b7b-ad40-e447275dc73c",
+        "message": "RFID SCANNED FAILED",
+        "component_data": {
+            "data": {
+                "id": "0",
+                "error": "Wrong tag"
+            }
+        },
+        "date_logged": "2025-03-13T17:34:21.150723"
+    },
+    {
+        "id": "c0ca71e9-5e65-498a-9872-d084fdd6ef4d",
+        "message": "LED TURNED OFF!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "off"
+            }
+        },
+        "date_logged": "2025-03-13T17:34:21.157895"
+    },
+    {
+        "id": "63831d10-a769-4cab-a892-5b3c9e0628eb",
+        "message": "RFID SCANNED SUCCESSFULLY",
+        "component_data": {
+            "id": "358152211892",
+            "name": "Tag 002",
+            "data": {
+                "id": "111",
+                "username": "vladut",
+                "password": "password123",
+                "role": "User"
+            }
+        },
+        "date_logged": "2025-03-13T17:35:57.709146"
+    },
+    {
+        "id": "39dab401-21b0-46d9-a298-c4cf9c6bd03e",
+        "message": "LED TWO TURN ON!",
+        "component_data": {
+            "data": {
+                "id": "1",
+                "led": "2"
+            }
+        },
+        "date_logged": "2025-03-13T17:35:57.714530"
+    }
+]

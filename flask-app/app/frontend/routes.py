@@ -1,5 +1,5 @@
 import requests
-from flask import render_template
+from flask import render_template, request
 from . import frontend_bp  # Import the frontend_bp blueprint
 import psutil
 import os
@@ -70,11 +70,26 @@ def signup():
     return render_template("signup.html")
 
 @frontend_bp.route("/user", methods=["GET"])
+<<<<<<< HEAD
+def user_page():
+    username = request.args.get('username', 'Guest')  # Get username from URL query params
+    return render_template('user.html', user=username)  # Pass user to template
+=======
 def user():
 
     return render_template("user.html")
+>>>>>>> upstream/main
 
 @frontend_bp.route("/admin", methods=["GET", "POST"])
 def admin():
     
+<<<<<<< HEAD
     return render_template("admin.html")
+
+@frontend_bp.route("/leds", methods=["GET", "POST"])
+def leds():
+    
+    return render_template("leds.html")
+=======
+    return render_template("admin.html")
+>>>>>>> upstream/main

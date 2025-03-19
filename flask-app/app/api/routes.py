@@ -2,25 +2,195 @@ from flask import jsonify, request
 from . import api_bp
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
-import threading
 import time
+from pydantic import BaseModel
+import RPi.GPIO as GPIO
+from app.database.database import db
+from app.database.models.users import User
+from app.database.utils.logs import insert_log
+import uuid
 
+<<<<<<< HEAD
+# import Adafruit_SSD1306
+# from PIL import Image, ImageDraw, ImageFont
+=======
 from app.database.database import db
 from app.database.models.users import User
 
 latest_rfid = {"id": None, "text": None}  # Store the last read RFID data
+>>>>>>> upstream/main
 
-def rfid_reader():
-    global latest_rfid
+# LEDS LIGHT
+
+LED_ONE = 27
+LED_TWO = 16
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_ONE, GPIO.OUT)
+GPIO.setup(LED_TWO, GPIO.OUT)
+
+
+@api_bp.route('/led/1/on', methods=['GET'])
+def led_1_on():
+    GPIO.output(LED_ONE, GPIO.HIGH)
+    GPIO.output(LED_TWO, GPIO.LOW)
+    data_returned = {
+        "data": {
+            "id": "1",
+            "led": "1"
+        }
+    }
+    insert_log(log_id=str(uuid.uuid4()), message= "LED ONE TURN ON!", data=data_returned)
+    GPIO.cleanup
+    return jsonify({"status": "success", "message": "LED 1 turned on, LED 2 turned off"}), 200
+
+@api_bp.route('/led/2/on', methods=['GET'])
+def led_2_on():
+    GPIO.output(LED_ONE, GPIO.LOW)
+    GPIO.output(LED_TWO, GPIO.HIGH)
+    data_returned = {
+        "data": {
+            "id": "1",
+            "led": "2"
+        }
+    }
+    insert_log(log_id=str(uuid.uuid4()), message= "LED TWO TURN ON!", data=data_returned)
+    GPIO.cleanup
+    return jsonify({"status": "success", "message": "LED 1 turned off, LED 2 turned on"}), 200
+
+@api_bp.route('/led/off', methods=['GET'])
+def all_off():
+    GPIO.output(LED_ONE, GPIO.LOW)
+    GPIO.output(LED_TWO, GPIO.LOW)
+    data_returned = {
+        "data": {
+            "id": "1",
+            "led": "off"
+        }
+    }
+    insert_log(log_id=str(uuid.uuid4()), message= "LED TURNED OFF!", data=data_returned)
+    GPIO.cleanup
+    return jsonify({"status": "success", "message": "LED 1 turned off, LED 2 turned on"}), 200
+
+
+
+# Global variable to store the RFID scan result
+scanned_rfid = None
+
+def read_rfid_loop():
+    global scanned_rfid
     reader = SimpleMFRC522()
+<<<<<<< HEAD
+
+=======
+>>>>>>> upstream/main
     while True:
         try:
             print("Waiting for RFID scan...")
-            rfid_id, text = reader.read()
-            print(f"Scanned RFID: {rfid_id}, Data: {text}")
-            latest_rfid = {"id": rfid_id, "text": text}  # Store the latest scan
-            time.sleep(2)  # Prevent repeated scanning
+            tag_id, text = reader.read()
+            scanned_rfid = {"id": tag_id, "name": text, "data": "Something"}
+            print(f"✅ Scanned RFID: {scanned_rfid}")
+            time.sleep(1)
+            return scanned_rfid
         except Exception as e:
+<<<<<<< HEAD
+            print(f"❌ Error while reading RFID: {e}")
+            time.sleep(2)  # Avoid busy loop on failure
+
+@api_bp.route('/wait_for_rfid', methods=['GET'])
+def wait_for_rfid():
+    print("Waiting for RFID scan...")
+    read_rfid_loop()
+
+    log_id = str(uuid.uuid4())
+    print(log_id, scanned_rfid, "Scanned RFID!")
+    object, error = db.insert_log(log_id=log_id, tag=scanned_rfid, message="Scanned RFID!")
+    if not error:
+        return jsonify({"status": "success", "object": object}), 200
+    else:
+        return jsonify({"status": "failed"}, error), 200
+
+
+@api_bp.route('/get_logs', methods=['GET'])
+def get_logs():
+    return db.get_all_logs()
+
+
+
+
+# # # MESSAGE DISPLAY
+
+# # Initialize the display (use the correct I2C address if needed)
+# display = Adafruit_SSD1306.SSD1306_128_64(rst=None)
+# display.begin()
+# display.clear()
+# display.display()
+
+# # Create a blank image for drawing
+# image = Image.new('1', (display.width, display.height))
+# draw = ImageDraw.Draw(image)
+
+# # Load a default font
+# font = ImageFont.load_default()
+
+# # Draw some text on the image
+# draw.text((0, 0), 'Hello, Raspberry Pi!', font=font, fill=255)
+
+# # Display the image on the screen
+# display.image(image)
+# display.display()
+
+# # Wait for a few seconds before clearing the screen
+# time.sleep(5)
+# display.clear()
+# display.display()
+
+
+#LOGIN 
+
+class Login(BaseModel):
+    username: str
+    password: str
+
+
+@api_bp.route("/login", methods=["POST"])
+def login():
+    users = db.get_all_users()
+    data = request.json
+    for user in users:
+        if str(user.get("username")) == str(data.get("username")) and str(user.get("password")) == str(data.get("password")):
+            return jsonify(user), 200
+    return "Login failed", 400
+
+@api_bp.route("/check_tag", methods=["POST"])
+def check_tag():
+    tags = db.get_all_tags()
+    data = request.json
+    for tag in tags:
+        if tag.get("data").get("id") == data.get("id"):
+            read_rfid_loop()
+            print(tag)
+            insert_log(log_id=str(uuid.uuid4()), message= "RFID SCANNED SUCCESSFULLY", data=tag)
+            
+            if str(scanned_rfid.get("id")) == str(tag.get("id")):
+                if str(tag.get("id")) == "1044211108658":
+                    led_1_on()
+                elif str(tag.get("id")) == "358152211892":
+                    led_2_on()
+                else:
+                    all_off()
+                return data, 200 
+    data_returned = {
+        "data": {
+            "id": "0",
+            "error": "Wrong tag"
+        }
+    }
+    insert_log(log_id=str(uuid.uuid4()), message= "RFID SCANNED FAILED", data=data_returned)
+    all_off()
+    return jsonify({"message":"Wrong tag"}), 400
+
+=======
             print(f"RFID Read Error: {e}")
         finally:
             GPIO.cleanup()
@@ -34,6 +204,7 @@ def get_latest_rfid():
     return jsonify(latest_rfid)
 
 
+>>>>>>> upstream/main
 # User Endpoints
 @api_bp.route("/users", methods=["GET"])
 def get_users():
@@ -64,6 +235,12 @@ def delete_user(user_id):
 
 
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> upstream/main
 # Tag Endpoints
 @api_bp.route("/tags", methods=["GET"])
 def get_tags():

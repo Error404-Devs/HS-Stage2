@@ -1,8 +1,31 @@
 from app.database.utils.users import *
 from app.database.utils.tags import *
+<<<<<<< HEAD
+from app.database.utils.logs import *
+
+class Database:
+    # Logs-related methods
+    @staticmethod
+    def get_all_logs():
+        return get_all_logs()
+
+    @staticmethod
+    def insert_log(log_id, message, tag):
+        return insert_log(log_id=log_id, message=message, tag=tag)
+
+    # @staticmethod
+    # def update_user(user_id: int, updated_fields: dict):
+    #     return update_user(user_id=user_id, updated_fields=updated_fields)
+
+    # @staticmethod
+    # def delete_user(user_id: int):
+    #     return delete_user(user_id=user_id)
+
+=======
 
 
 class Database:
+>>>>>>> upstream/main
     # User-related methods
     @staticmethod
     def get_all_users():

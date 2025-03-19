@@ -25,31 +25,92 @@
         </p>
       </form>
     </div>
+<script>
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    <script>
-      document
-        .getElementById("login-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
 
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
+      console.log("Username:", username);
+      console.log("Password:", password);
 
-          console.log("Username:", username);
-          console.log("Password:", password);
+      fetch("http://192.168.194.156:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Login failed");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Server Response:", data);
 
-          fetch("https://your-backend.com/api/login", {
+          // Replace login form with "Please scan your tag..." message
+          document.querySelector(".login-container").innerHTML =
+            "<h2 style='font-size: 2em'>Please scan your tag...</h2>";
+
+          // Send request to /check_tag with the user data
+          return fetch("http://192.168.194.156:5000/api/check_tag", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password }),
-          })
-            .then((response) => response.json())
-            .then((data) => console.log("Server Response:", data))
-            .catch((error) => console.error("Error:", error));
+            body: JSON.stringify(data),
+          }).then((checkTagResponse) => {
+            if (!checkTagResponse.ok) {
+              throw new Error("Tag check failed");
+            }
+            return checkTagResponse.json().then((checkTagData) => ({
+              user: data.user,
+              checkTagData: checkTagData,
+            }));
+          });
+        })
+        .then(({ user, checkTagData }) => {
+          console.log("Tag Check Response:", checkTagData);
+          console.log(checkTagData);
+
+        window.location.href = `/user?username=${(checkTagData.username)}`;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+
+          // Restore login form if the tag check fails
+          document.querySelector(".login-container").innerHTML = `
+            <h2>Login</h2>
+            <form id="login-form">
+              <div class="input-group">
+                <input type="text" id="username" required />
+                <label for="username">Username</label>
+              </div>
+              <div class="input-group">
+                <input type="password" id="password" required />
+                <label for="password">Password</label>
+              </div>
+              <button type="submit" class="login-btn">Login</button>
+              <p class="register">
+                Don't have an account? <a href="/signup">Sign Up</a>
+              </p>
+            </form>
+            <p style="color: red; margin-top: 10px;">Tag check failed. Please try again.</p>
+          `;
+
+          // Reattach event listener to the re-rendered form
+          document
+            .getElementById("login-form")
+            .addEventListener("submit", arguments.callee);
         });
-    </script>
+    });
+
+</script>
   </body>
 </html>
 

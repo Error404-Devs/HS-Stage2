@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi LED Control</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+        }
+        .led-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        .led {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #444; /* Off state */
+            border: 2px solid white;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .on1 {
+            background-color: rgb(11, 173, 17); /* LED on */
+        }
+        .on2 {
+            background-color: rgb(226, 223, 12); /* LED on */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LED Control from Raspberry Pi</h1>
+    
+    <div class="led-container">
+        <div>
+            <p>LED 1</p>
+            <div id="led1" class="led"></div>
+        </div>
+        <div>
+            <p>LED 2</p>
+            <div id="led2" class="led"></div>
+            
+        </div>
+    </div>
+
+    <script>
+        async function fetchLogs() {
+            const response = await fetch('http://127.0.0.1:5000/api/get_logs');
+            const logs = await response.json();
+            console.log(logs);
+            const lastLog = logs[logs.length - 1];
+            const lastTagId = lastLog.component_data.led;
+
+            // Get LED elements
+            const led1 = document.getElementById('led1');
+            const led2 = document.getElementById('led2');
+
+            // Turn LEDs on/off based on the last tag ID
+            if (lastTagId === "two") {
+                led1.classList.add('on1');
+                led2.classList.remove('on2');
+            } else if (lastTagId === "one") {
+                led2.classList.add('on2');
+                led1.classList.remove('on1');
+            } else {
+                led1.classList.remove('on1');
+                led2.classList.remove('on2');
+            }
+        }
+
+        // Fetch logs and update LED states on page load
+        window.onload = fetchLogs;
+    </script>
+
+</body>
+</html>
