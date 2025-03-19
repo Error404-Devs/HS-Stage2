@@ -1,9 +1,8 @@
 import requests
-from flask import render_template
+from flask import render_template, request
 from . import frontend_bp  # Import the frontend_bp blueprint
 import psutil
 import os
-
 def get_cpu_info():
     cpu_info = {
         "architecture": os.uname().machine,
@@ -32,10 +31,14 @@ def home():
     try:
         response = requests.get("http://127.0.0.1:5000/api/rfid/latest")
         rfid_data = response.json()
+
+        response_users = requests.get("http://127.0.0.1:5000/api/users")
+        print(response_users.json())
+        users = response.json()
     except:
         rfid_data = {"id": "N/A", "text": "No data available"}
-
-    return render_template("index.html", cpu_info=cpu_info, rfid_data=rfid_data)
+    # print(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!{users}")
+    return render_template("index.html", cpu_info=cpu_info, rfid_data=rfid_data) #, users=users)
 
 @frontend_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -66,13 +69,17 @@ def signup():
 
     return render_template("signup.html")
 
-@frontend_bp.route("/user", methods=["GET", "POST"])
-def user():
-
-    return render_template("user.html")
+@frontend_bp.route("/user", methods=["GET"])
+def user_page():
+    username = request.args.get('username', 'Guest')  # Get username from URL query params
+    return render_template('user.html', user=username)  # Pass user to template
 
 @frontend_bp.route("/admin", methods=["GET", "POST"])
 def admin():
-
+    
     return render_template("admin.html")
 
+@frontend_bp.route("/leds", methods=["GET", "POST"])
+def leds():
+    
+    return render_template("leds.html")
