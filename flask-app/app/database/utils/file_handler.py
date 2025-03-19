@@ -22,8 +22,17 @@ def write_json(filename, data):
 
 
 def append_json(filename, new_entry):
+<<<<<<< HEAD
     data = read_json(filename)  # Ensure data is a list
     #print(f"Read data from {filename}: {data}")  # Debug: Log the data read from file
     data.append(new_entry)  # Append new entry
     write_json(filename, data)
     #print(f"Appended new entry to {filename}: {new_entry}")  # Debug: Log the new entry
+=======
+    """Append a new entry to an existing JSON file."""
+    data = read_json(filename)  # Ensure data is a list
+    # print(f"Read data from {filename}: {data}")  # Debug: Log the data read from file
+    data.append(new_entry)  # Append new entry
+    write_json(filename, data)
+    # print(f"Appended new entry to {filename}: {new_entry}")  # Debug: Log the new entry
+>>>>>>> upstream/main

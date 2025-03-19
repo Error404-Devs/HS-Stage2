@@ -29,10 +29,16 @@ def insert_tag(tag_id: str, name: str, user: User):
     except Exception as e:
         return None, {"error": f"Error inserting tag: {str(e)}"}
 
+<<<<<<< HEAD
 
 def update_tag(tag_id: str, updated_fields: dict):
     file_path = os.path.join("app", "database", "storage", "tags.json")
     
+=======
+def update_tag(tag_id: str, updated_fields: dict):
+    file_path = os.path.join("app", "database", "storage", "tags.json")
+
+>>>>>>> upstream/main
     tags = read_json(file_path)
 
     tag = next((tag for tag in tags if tag['id'] == tag_id), None)
@@ -41,12 +47,17 @@ def update_tag(tag_id: str, updated_fields: dict):
         return None, {"error": f"Tag with ID {tag_id} not found."}
 
     try:
+<<<<<<< HEAD
         new_user_id = updated_fields.get("data", {}).get("id")
 
         if new_user_id:
             for existing_tag in tags:
                 if existing_tag["id"] != tag_id and existing_tag.get("data", {}).get("id") == new_user_id:
                     existing_tag["data"] = {}
+=======
+        updated_tag_data = {**tag, **updated_fields}
+        # valid_tag = Tag.model_validate(updated_tag_data)
+>>>>>>> upstream/main
 
         for field, value in updated_fields.items():
             tag[field] = value
@@ -55,8 +66,12 @@ def update_tag(tag_id: str, updated_fields: dict):
 
         return {"message": f"Tag with ID {tag_id} updated successfully."}, None
     except Exception as e:
+<<<<<<< HEAD
         return None, {"error": f"Validation failed: {str(e)}"} 
 
+=======
+        return None, {"error": f"Validation failed: {str(e)}"}
+>>>>>>> upstream/main
 
 
 def delete_tag(tag_id: str):

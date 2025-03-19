@@ -10,8 +10,15 @@ from app.database.models.users import User
 from app.database.utils.logs import insert_log
 import uuid
 
+<<<<<<< HEAD
 # import Adafruit_SSD1306
 # from PIL import Image, ImageDraw, ImageFont
+=======
+from app.database.database import db
+from app.database.models.users import User
+
+latest_rfid = {"id": None, "text": None}  # Store the last read RFID data
+>>>>>>> upstream/main
 
 # LEDS LIGHT
 
@@ -73,7 +80,10 @@ scanned_rfid = None
 def read_rfid_loop():
     global scanned_rfid
     reader = SimpleMFRC522()
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
     while True:
         try:
             print("Waiting for RFID scan...")
@@ -83,6 +93,7 @@ def read_rfid_loop():
             time.sleep(1)
             return scanned_rfid
         except Exception as e:
+<<<<<<< HEAD
             print(f"❌ Error while reading RFID: {e}")
             time.sleep(2)  # Avoid busy loop on failure
 
@@ -179,6 +190,21 @@ def check_tag():
     all_off()
     return jsonify({"message":"Wrong tag"}), 400
 
+=======
+            print(f"RFID Read Error: {e}")
+        finally:
+            GPIO.cleanup()
+            
+# Start RFID reading in a separate thread
+rfid_thread = threading.Thread(target=rfid_reader, daemon=True)
+rfid_thread.start()
+
+@api_bp.route("/rfid/latest")
+def get_latest_rfid():
+    return jsonify(latest_rfid)
+
+
+>>>>>>> upstream/main
 # User Endpoints
 @api_bp.route("/users", methods=["GET"])
 def get_users():
@@ -209,9 +235,12 @@ def delete_user(user_id):
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> upstream/main
 # Tag Endpoints
 @api_bp.route("/tags", methods=["GET"])
 def get_tags():

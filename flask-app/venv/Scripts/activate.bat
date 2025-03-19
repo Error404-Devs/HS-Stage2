@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set "VIRTUAL_ENV=C:\Users\Lenovo\Documents\GitHub\HS-Stage2\flask-app\venv"
+=======
+set VIRTUAL_ENV=C:\Users\david\OneDrive\Documents\GitHub\HS-Stage2\flask-app\venv
+>>>>>>> upstream/main
 
 if not defined PROMPT set PROMPT=$P$G
 

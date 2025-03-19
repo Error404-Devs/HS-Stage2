@@ -1,5 +1,6 @@
 from app.database.utils.users import *
 from app.database.utils.tags import *
+<<<<<<< HEAD
 from app.database.utils.logs import *
 
 class Database:
@@ -20,6 +21,11 @@ class Database:
     # def delete_user(user_id: int):
     #     return delete_user(user_id=user_id)
 
+=======
+
+
+class Database:
+>>>>>>> upstream/main
     # User-related methods
     @staticmethod
     def get_all_users():
